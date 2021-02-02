@@ -64,7 +64,7 @@ The following summarize the technology that will likely be used when deploying t
 ## Team Members
 
 * Jonathan Hubermann ([GitHub/hubjongit](https://github.com/hubjongit)) TEAM LEADER
-* 
+* Ahmad Hashem ([GitHub/AhmadHashems](https://github.com/AhmadHashems))
 * 
 * 
 * 
