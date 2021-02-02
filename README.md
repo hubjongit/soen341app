@@ -51,6 +51,7 @@ Snowflake is a web-based social network platform that enables users to share pic
 
 </details>
 
+<details>
 <summary>Deployment</summary>
 
 The following summarize the technology that will likely be used when deploying the web-application to a Cloud server for public access
