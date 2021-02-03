@@ -6,7 +6,7 @@ SOEN 341 Winter 2021 challenges students to develop an instagram-like applicatio
 
 ## Project Description
 
-Snowflake is a web-based social network platform that enables users to share pictures with their followers and keep up to date on those around them. People can create their own accounts with which they are able to post a picture at any time with an accompanying descriptive caption. Any other following the account is able to see those pictures, and even comment on them themselves. This could lead to all sorts of interesting discussion! In the case that user feels uncomfortable with the content of a picture or caption, Snowflake has an integrated Report feature allowing them to voice their concern directly to a dedicated Snowflake platform administrator.
+Snowflake is a web-based social network platform that enables users to share pictures with their followers and keep up to date on those around them. People can create their own accounts with which they are able to post a picture at any time with an accompanying descriptive caption. Any other user following the account is able to see those pictures, and even comment on them themselves. This could lead to all sorts of interesting discussion! In the case that a user feels uncomfortable with the content of a picture or caption, Snowflake has an integrated Report feature allowing them to voice their concern directly to a dedicated Snowflake platform administrator.
 
 ### Core Features
 
