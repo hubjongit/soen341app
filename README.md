@@ -22,6 +22,7 @@ Snowflake is a web-based social network platform that enables users to share pic
 
 #### Future Features
 * Display number of comments of a picture
+* Deleting pictures as a user and/or administrator
 
 ## Application Technology (Languages, Frameworks, Techniques)
 
