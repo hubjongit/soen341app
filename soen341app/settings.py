@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'api.apps.ApiConfig',
-
     'rest_framework',
 ]
 
@@ -60,8 +59,7 @@ ROOT_URLCONF = 'soen341app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates', os.path.join(BASE_DIR, 'frontend/build'), ]
-        ,
+        'DIRS': [BASE_DIR / 'templates', os.path.join(BASE_DIR, 'frontend/build'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,6 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+    {
+        'NAME': 'soen341app.CustomPasswordValidator.CustomPasswordValidator',
     },
 ]
 
