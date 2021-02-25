@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from api.serializer import RegisterSerializer
+from api.serializers import RegisterSerializer
 
 
 # Create your views here.
@@ -21,4 +21,9 @@ def api_register(request):
             user = form.save()
             login(request, user)
             return Response({"success": "true"})
-        return Response(form.errors)
+        errors = form.errors.values()
+        error_messages = []
+        for error in errors:
+            for one_error in error:
+                error_messages.append(one_error)
+        return Response({"errors": (error_messages)})

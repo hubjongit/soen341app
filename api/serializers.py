@@ -14,15 +14,16 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def save(self):
         username = self.validated_data['username']
-        email = self.validated_data['email']
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
         if password != password2:
-            raise serializers.ValidationError({"password": 'Passwords must match.'})
+            errors = {'errors': {"password": ["Passwords must match."]}}
+            raise serializers.ValidationError(errors)
         try:
             validate_password(password, username)
-            user = User.objects.create_user(username=username, password=password, email=email)
+            user = User.objects.create_user(username=username, password=password)
             user.save()
             return user
-        except ValidationError as error:
-            raise serializers.ValidationError({"password": error})
+        except ValidationError as errors:
+            error_messages = [error for error in errors]
+            raise serializers.ValidationError({'errors': error_messages})
