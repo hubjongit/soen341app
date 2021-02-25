@@ -17,7 +17,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
         if password != password2:
-            errors = {'errors': {"password": ["Passwords must match."]}}
+            errors = {'errors':  ["Passwords do not match."]}
             raise serializers.ValidationError(errors)
         try:
             validate_password(password, username)

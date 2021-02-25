@@ -21,9 +21,5 @@ def api_register(request):
             user = form.save()
             login(request, user)
             return Response({"success": "true"})
-        errors = form.errors.values()
-        error_messages = []
-        for error in errors:
-            for one_error in error:
-                error_messages.append(one_error)
-        return Response({"errors": (error_messages)})
+        error_messages = [one_error for error in form.errors.values() for one_error in error]
+        return Response({"errors": error_messages})
