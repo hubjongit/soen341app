@@ -36,5 +36,5 @@ def api_login(request):
                 login(request, user)
                 return Response({"success": "true"})
             else:
-                errors = {"errors": ["username and password do not match."]}
-                return Response(errors)
+                error_message = ["The username and/or password you entered is incorrect."]
+                return Response({"errors": error_message})
