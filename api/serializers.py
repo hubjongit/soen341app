@@ -27,3 +27,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         except ValidationError as errors:
             error_messages = [error for error in errors]
             raise serializers.ValidationError({'errors': error_messages})
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=300)
+    password = serializers.CharField(max_length=300)
