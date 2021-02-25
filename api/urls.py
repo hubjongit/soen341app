@@ -6,4 +6,5 @@ app_name = "api"
 urlpatterns = [
     path('', views.api_overview, name="api-overview"),
     path('register/', views.api_register, name="api-register"),
+    path('post/', views.api_post, name="api-post"),
 ]

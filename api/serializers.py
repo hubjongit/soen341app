@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
+from main.models import Post
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -17,7 +18,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
         if password != password2:
-            errors = {'errors':  ["Passwords do not match."]}
+            errors = {'errors': ["Passwords do not match."]}
             raise serializers.ValidationError(errors)
         try:
             validate_password(password, username)
@@ -27,3 +28,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         except ValidationError as errors:
             error_messages = [error for error in errors]
             raise serializers.ValidationError({'errors': error_messages})
+
+
+class PostSerializer(serializers.ModelSerializer):
+    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %H:%M")
+    username = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Post
+        fields = ('username', 'timestamp', 'caption', 'picture',)
