@@ -38,3 +38,11 @@ def api_login(request):
             else:
                 error_message = ["The username and/or password you entered is incorrect."]
                 return Response({"errors": error_message})
+
+            
+@api_view(['POST'])
+def api_logout(request):
+    if request.method == "POST":
+        logout(request)
+        return Response({"success": str(request.user.is_authenticated()).lower()})
+    
