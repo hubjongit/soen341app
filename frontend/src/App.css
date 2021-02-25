@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+body, html, #root, .app, .container {
+  width: 100%;
+  height: 100%;
+
+}
+
+.container {
+  font-family: "Roboto Light";
+  font-size: 28px;
+  color: #292929;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d4ebf2;
+}
+
 .register-form {
  font-family: 'Roboto', sans-serif;
  box-sizing: border-box;
@@ -28,7 +47,6 @@
 .submit-button {
  padding-top: 8px;
 }
-
 
 .btn {
  width: 100%;
