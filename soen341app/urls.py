@@ -29,6 +29,7 @@ urlpatterns = [
     path('login/', TemplateView.as_view(template_name='index.html')),
     path('feed/', TemplateView.as_view(template_name='index.html')),
     path('follow/', TemplateView.as_view(template_name='index.html')),
+    path('post/', TemplateView.as_view(template_name='index.html')),
     path('', RedirectView.as_view(url='feed/'), name="home-redirect-feed"),
 ]
 
