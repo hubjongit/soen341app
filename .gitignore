@@ -3,4 +3,3 @@
 __pycache__/
 *.py[cod]
 /soen341app/secret_settings.py
-/db.sqlite3

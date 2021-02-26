@@ -21,7 +21,6 @@ class LoginForm extends React.Component {
 
         // Since using states means `this.state` holds the current state of each input field, we can simply convert to JSON and its ready for POST
         const postData = JSON.stringify(this.state);
-        console.log(postData)
 
         /*
         // If using the FormData instead, it will only take what is currently the value of the <input>, and not its state
@@ -39,7 +38,9 @@ class LoginForm extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 if (data.success === 'true') {
+                    console.log('val of succes: ' + (data.success === 'true'))
                     return <Redirect to='/feed' />
                 }
                 const ErrorsList = () => (
