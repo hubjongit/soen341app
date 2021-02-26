@@ -66,6 +66,7 @@ class Feed extends Component {
                 <div key={index}>
                     <Post username={post.username} caption={post.caption}
                           picture={post.picture}/>
+
                           <span> {posts.username}</span>
                          <span> {post.username}</span>
 
