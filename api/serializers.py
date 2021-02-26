@@ -31,7 +31,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
         fields = '__all__'
@@ -49,3 +48,13 @@ class FeedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('username', 'timestamp', 'picture', 'caption')
+
+
+class UsernameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username',)
+
+
+class FollowRelationSerializer(serializers.Serializer):
+    user_to_follow = serializers.CharField()

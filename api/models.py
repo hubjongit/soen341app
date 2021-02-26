@@ -15,3 +15,14 @@ class Post(models.Model):
 
     class Meta:
         ordering = ("-timestamp",)
+
+
+class FollowRelation(models.Model):
+    user = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
+    user_to_follow = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'user_to_follow',)
+
+    def __str__(self):
+        return "{0} follows {1}".format(self.user.username, self.user_to_follow.username)
