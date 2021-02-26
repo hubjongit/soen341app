@@ -16,7 +16,7 @@ body, html, #root, .app, .container {
     background-color: #d4ebf2;
 }
 
-.register-form {
+.auth-form {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     width: 100%;

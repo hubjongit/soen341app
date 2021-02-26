@@ -52,7 +52,7 @@ class RegisterForm extends React.Component {
             // The name property of every field needs to be the same as the state so that the relation is established
             <form
                 onSubmit={this.onSubmit}
-                className="register-form input">
+                className="auth-form input">
                 Sign up
                 <input
                     name='username'

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import SubmitButton from "./SubmitButton";
-import {Link} from "react-router-dom"
+import {Redirect, Link} from 'react-router-dom'
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -21,6 +21,7 @@ class LoginForm extends React.Component {
 
         // Since using states means `this.state` holds the current state of each input field, we can simply convert to JSON and its ready for POST
         const postData = JSON.stringify(this.state);
+        console.log(postData)
 
         /*
         // If using the FormData instead, it will only take what is currently the value of the <input>, and not its state
@@ -38,7 +39,9 @@ class LoginForm extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                if (data.success === 'true') {
+                    return <Redirect to='/feed' />
+                }
                 const ErrorsList = () => (
                     <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>
                 );
@@ -53,7 +56,7 @@ class LoginForm extends React.Component {
             // The name property of every field needs to be the same as the state so that the relation is established
             <form
                 onSubmit={this.onSubmit}
-                className="register-form input">
+                className="auth-form input">
                 Login
                 <input
                     name='username'
