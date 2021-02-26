@@ -31,7 +31,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
         fields = '__all__'
@@ -40,3 +39,22 @@ class PostSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
+
+
+class FeedSerializer(serializers.ModelSerializer):
+    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %H:%M", required=False)
+    username = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Post
+        fields = ('username', 'timestamp', 'picture', 'caption')
+
+
+class UsernameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username',)
+
+
+class FollowRelationSerializer(serializers.Serializer):
+    user_to_follow = serializers.CharField()
