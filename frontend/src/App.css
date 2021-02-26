@@ -39,6 +39,13 @@ form.input>input {
     margin-top: 0.5em;
 }
 
+#post-response-errors>ul {
+    font-size: 12px;
+    display: table;
+    margin: 0 auto;
+    padding-top: 1em;
+}
+
 .submit-button {
     padding-top: 8px;
 }

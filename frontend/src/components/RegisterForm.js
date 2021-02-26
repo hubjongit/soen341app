@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import SubmitButton from "./SubmitButton";
 
 class RegisterForm extends React.Component {
@@ -18,7 +19,7 @@ class RegisterForm extends React.Component {
         e.preventDefault();
 
         // Since using states means `this.state` holds the current state of each input field, we can simply convert to JSON and its ready for POST
-        const data = JSON.stringify(this.state);
+        const postData = JSON.stringify(this.state);
 
         /*
         // If using the FormData instead, it will only take what is currently the value of the <input>, and not its state
@@ -31,19 +32,19 @@ class RegisterForm extends React.Component {
 
         fetch('/api/register/', {
             method: 'POST',
-
-            body: data
+            body: postData,
+            headers: {'content-type': 'application/json'}
         })
-            .then(response => {
-                // reset form
-                // document.getElementById("comment-form").reset()
-                // display success message
-                // document.getElementById("success").style.display = "block"
-                alert(response);
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const ErrorsList = () => (
+                    <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>
+                );
+                const rootElement = document.getElementById("post-response-errors");
+                ReactDOM.render(<ErrorsList />, rootElement);
             })
-            .catch(error => {
-                console.log(error)
-            })
+            .catch(error => console.log(error))
     }
 
     render() {
@@ -75,6 +76,7 @@ class RegisterForm extends React.Component {
                     type='submit'
                     text='Register'
                 />
+                <div id="post-response-errors"/>
             </form>
         )
     }
