@@ -54,5 +54,4 @@ def api_login(request):
 def api_logout(request):
     if request.method == "POST":
         logout(request)
-        return Response({"success": str(request.user.is_authenticated()).lower()})
-
+        return Response({"success": str(not request.user.is_authenticated).lower()})
