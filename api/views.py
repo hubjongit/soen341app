@@ -34,6 +34,7 @@ def api_register(request):
 @api_view(['POST'])
 def api_post(request):
     if request.method == "POST":
+        request.data.update({'user': request.user.id})
         form = PostSerializer(data=request.data)
         if form.is_valid():
             form.save()
