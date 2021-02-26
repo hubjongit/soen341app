@@ -1,3 +1,11 @@
 from django.contrib import admin
+from .models import Post
 
-# RegisterForm your models here.
+
+class PostAdmin(admin.ModelAdmin):
+    readonly_fields = ('timestamp',)
+
+
+# Register your models here.
+admin.site.register(Post, PostAdmin)
+
