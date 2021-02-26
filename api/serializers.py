@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from main.models import Post
+from api.models import Post
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -31,14 +31,10 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %H:%M", required=False)
-    username = serializers.ReadOnlyField(source='user.username')
-    caption = serializers.CharField(max_length=200, required=False)
-    picture = serializers.ImageField()
 
     class Meta:
         model = Post
-        fields = ('caption', 'picture', 'username', 'timestamp')
+        fields = '__all__'
 
 
 class LoginSerializer(serializers.Serializer):
