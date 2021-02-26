@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import SubmitButton from "./SubmitButton";
+import {Link} from 'react-router-dom'
 
-class RegisterForm extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         // By using states we can associate the name property of the <input> with the state variable and we can initialize values
-        this.state = ({username: '', password: '', password2: ''})
+        this.state = ({username: '', password: ''})
     }
 
     onChange = (e) => {
@@ -30,7 +31,7 @@ class RegisterForm extends React.Component {
         console.log(JSON.stringify(Object.fromEntries(formData)));
         */
 
-        fetch('/api/register/', {
+        fetch('/api/login/', {
             method: 'POST',
             body: postData,
             headers: {'content-type': 'application/json'}
@@ -55,7 +56,7 @@ class RegisterForm extends React.Component {
             <form
                 onSubmit={this.onSubmit}
                 className="auth-form input">
-                Sign up
+                Login
                 <input
                     name='username'
                     type='text'
@@ -68,20 +69,20 @@ class RegisterForm extends React.Component {
                     placeholder='Password'
                     onChange={this.onChange}
                 />
-                <input
-                    name='password2'
-                    type='password'
-                    placeholder='Repeat Password'
-                    onChange={this.onChange}
+                <SubmitButton
+                    type='submit'
+                    text='Login'
                 />
+                <Link to ="/register">
                 <SubmitButton
                     type='submit'
                     text='Register'
                 />
+                </Link>
                 <div id="post-response-errors"/>
             </form>
         )
     }
 }
 
-export default RegisterForm;
+export default LoginForm;
