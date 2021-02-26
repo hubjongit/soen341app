@@ -36,6 +36,7 @@ def api_post(request):
         return Response({"errors": error_messages})
 
 
+@api_view(['POST'])
 def api_login(request):
     if request.method == "POST":
         form = LoginSerializer(data=request.data)
