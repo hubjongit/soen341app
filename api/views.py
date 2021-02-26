@@ -1,10 +1,11 @@
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
-from api.models import Post
-from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer
+from api.models import Post, FollowRelation
+from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
+    FollowRelationSerializer
 
 
 # Create your views here.
@@ -52,7 +53,7 @@ def api_login(request):
                 error_message = ["The username and/or password you entered is incorrect."]
                 return Response({"errors": error_message})
 
-            
+
 @api_view(['POST'])
 def api_logout(request):
     if request.method == "POST":
@@ -62,13 +63,33 @@ def api_logout(request):
 
 @api_view(['GET'])
 def api_feed(request):
-    # # get all the users a user follows.
-    # following_objects = request.user.following.all()  # This return a list of FollowRelation objects
-    # # Iterate to get the following users from the objects
-    # following = [following_obj.following for following_obj in following_objects]
-    # following.append(request.user)  # Adding the user themselves to the list of users that their posts will show on home
-    # posts = Post.objects.filter(user__in=following)  # Returns a list of posts
-    # posts_serializer = FeedSerializer(posts, many=True)
-    posts = Post.objects.filter(user=request.user)  # Returns a list of posts
+    following_objects = request.user.following.all()
+    following = [following_obj.user_to_follow for following_obj in following_objects]
+    following.append(request.user)
+    posts = Post.objects.filter(user__in=following)
     posts_serializer = FeedSerializer(posts, many=True)
     return Response(posts_serializer.data)
+
+
+@api_view(['GET', 'POST'])
+def api_follow(request):
+    if request.method == "GET":
+        following_objects = request.user.following.all()
+        following = [following_obj.user_to_follow for following_obj in following_objects]
+        following.append(request.user)
+        users = User.objects.all()
+        new_users = [user for user in users if user not in following]
+        new_users_serializer = UsernameSerializer(new_users, many=True)
+        return Response(new_users_serializer.data)
+
+    elif request.method == "POST":
+        follow_form = FollowRelation()
+        form = FollowRelationSerializer(data=request.data)
+        if form.is_valid():
+            follow_form.user = request.user
+            follow_form.user_to_follow = User.objects.get(username=form.validated_data.get('user_to_follow'))
+            follow_form.save()
+            return Response({"success": "true"})
+        else:
+            error_messages = [one_error for error in form.errors.values() for one_error in error]
+            return Response({"errors": error_messages})
