@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
+import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
           <div className="container">
             <Switch>
               <Route path="/register" component={RegisterForm} />
+              <Route path="/login" component={LoginForm} />
             </Switch>
           </div>
         </div>
