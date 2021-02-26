@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -44,5 +44,4 @@ def api_login(request):
 def api_logout(request):
     if request.method == "POST":
         logout(request)
-        return Response({"success": str(request.user.is_authenticated()).lower()})
-    
+        return Response({"success": str(not request.user.is_authenticated).lower()})
