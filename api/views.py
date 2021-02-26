@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from api.serializers import RegisterSerializer, LoginSerializer
+from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer
 
 
 # Create your views here.
@@ -26,6 +26,16 @@ def api_register(request):
 
 
 @api_view(['POST'])
+def api_post(request):
+    if request.method == "POST":
+        form = PostSerializer(data=request.data)
+        if form.is_valid():
+            form.save()
+            return Response({"success": "true"})
+        error_messages = [one_error for error in form.errors.values() for one_error in error]
+        return Response({"errors": error_messages})
+
+
 def api_login(request):
     if request.method == "POST":
         form = LoginSerializer(data=request.data)
