@@ -63,3 +63,38 @@ form.input>input {
     background: #f2dbd4;
     cursor: pointer;
 }
+
+.post-card {
+    width: 35%;
+    border: 3px solid #add8e6;
+    background-color: #DAE0E3;
+    margin-bottom: 0.25em;
+    border-radius: 1em;
+}
+
+#feed-grid>Post:first-child {
+    margin-top: 4em;
+}
+
+.post-image {
+    height: auto;
+    width: 100%;
+    border-top: 3px solid #add8e6;
+    border-bottom: 3px solid #add8e6;
+}
+
+.post-text {
+    font-weight: normal;
+    padding: 10px;
+}
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.post-avatar {
+    margin-right: 10px;
+}
+#container-post {
+    padding-top: 2em;
+}
