@@ -1,8 +1,11 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from pytz import unicode
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from api.models import Post, FollowRelation
 from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
     FollowRelationSerializer
@@ -59,6 +62,15 @@ def api_logout(request):
     if request.method == "POST":
         logout(request)
         return Response({"success": str(not request.user.is_authenticated).lower()})
+
+
+@api_view(['GET'])
+def api_getauth(request):
+    content = {
+        'user': unicode(request.user),  # `django.contrib.auth.User` instance.
+        'auth': unicode(request.auth),  # None
+    }
+    return Response(content)
 
 
 @api_view(['GET'])
