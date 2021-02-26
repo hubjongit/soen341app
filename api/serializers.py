@@ -40,3 +40,12 @@ class PostSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
+
+
+class FeedSerializer(serializers.ModelSerializer):
+    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %H:%M", required=False)
+    username = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Post
+        fields = ('username', 'timestamp', 'picture', 'caption')

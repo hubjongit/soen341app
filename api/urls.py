@@ -9,4 +9,5 @@ urlpatterns = [
     path('post/', views.api_post, name="api-post"),
     path('login/', views.api_login, name="api-login"),
     path('logout/', views.api_logout, name="api-logout"),
+    path('feed/', views.api_feed, name="api-feed"),
 ]
