@@ -62,4 +62,64 @@ form.input>input {
     border-radius: 4px;
     background: #f2dbd4;
     cursor: pointer;
+    opacity: 0.8;
 }
+
+.btn:hover {
+    opacity: 1;
+}
+
+
+/*============== CSS FOR THE FOLLOW USER UI ==============*/
+
+.user-grid{
+    margin-left: 10%;
+    margin-right: 10%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.user-block {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+    border-radius: 25px;
+    background-color: #F5F5F5;
+    padding: 20px;
+    width: 125px;
+    height: 125px;
+    position: relative;
+    font-size: 17px;
+}
+
+.user-block:hover {
+    background-color: #e5e4e2;
+}
+
+.user-block:hover .follow-btn{
+    visibility: visible;
+}
+
+.user-block-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.follow-btn {
+    background-color: #f7bfbe;
+    border: none;
+    border-radius: 25px;
+    color: #808080;
+    padding: 6px 10px;
+    text-align: center;
+    opacity: 0.6;
+    visibility: hidden;
+}
+
+.follow-btn:hover {
+    opacity: 1;
+}
+/*========================================================*/
