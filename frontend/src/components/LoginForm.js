@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import SubmitButton from "./SubmitButton";
-import {Redirect, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -38,10 +38,8 @@ class LoginForm extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (data.success === 'true') {
-                    console.log('val of succes: ' + (data.success === 'true'))
-                    return <Redirect to='/feed' />
+                    return this.props.history.push('/feed')
                 }
                 const ErrorsList = () => (
                     <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>

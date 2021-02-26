@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import SubmitButton from "./SubmitButton";
-import {Redirect} from "react-router-dom";
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -39,7 +38,7 @@ class RegisterForm extends React.Component {
             .then(response => response.json())
             .then(data => {
                 if (data.success === 'true') {
-                    return <Redirect to='/feed' />
+                    return this.props.history.push('/feed')
                 }
                 const ErrorsList = () => (
                     <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>

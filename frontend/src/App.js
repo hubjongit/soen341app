@@ -6,18 +6,20 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
 function App() {
-  return (
-      <Router>
-        <div className="app">
-          <div className="container">
-            <Switch>
-              <Route path="/register" component={RegisterForm} />
-              <Route path="/login" component={LoginForm} />
-            </Switch>
-          </div>
-        </div>
-      </Router>
-  );
+    return (
+        <Router>
+            <div className="app">
+                <div className="container">
+                    <Switch>
+                        <Route path="/feed"/>
+                        <Route path="/register" component={RegisterForm} />
+                        <Route path="/login" component={LoginForm} />
+                        {/*<Route path="/follow" component={LoginForm} />*/}
+                    </Switch>
+                </div>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
