@@ -31,7 +31,7 @@ function PostForm() {
     function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('picture', image);
+        formData.append('image', image);
         formData.append('caption', caption);
 
         const csrftoken = getCookie('csrftoken')
@@ -48,7 +48,6 @@ function PostForm() {
         )
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (data.success === 'true') {
                     return history.push('/feed');
                 }

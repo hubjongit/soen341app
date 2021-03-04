@@ -8,7 +8,7 @@ class Feed extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = ({username: '', picture: '', caption: ''})
+        // this.state = ({username: '', image: '', caption: ''})
         this.state = {
             postData: [],
             activeItem: {
@@ -16,7 +16,7 @@ class Feed extends Component {
                 //Check what completed,editing fields do
                 id: null,
                 username: '',
-                picture: '',
+                image: '',
                 caption: '',
                 completed: false,
             },
@@ -55,7 +55,7 @@ class Feed extends Component {
                 {posts.map(function (post, index) {
                     return (
                         <Post username={post.username} caption={post.caption}
-                              picture={post.picture} key={index}/>
+                              image={post.image} key={index}/>
                     )
                 })
                 }
@@ -64,7 +64,7 @@ class Feed extends Component {
     }
 }
 
-function Post({username, caption, picture, index}) {
+function Post({username, caption, image, index}) {
 
     return (
         <div className="post-card" key={index}>
@@ -77,7 +77,7 @@ function Post({username, caption, picture, index}) {
                 <p className="post-username">{username}</p>
             </div>
             <img className="post-image"
-                 src={picture} alt="picture"/>
+                 src={image} alt="image"/>
             <p className="post-text"><strong>{username}:</strong> {caption}</p>
         </div>
     )
