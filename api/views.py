@@ -1,11 +1,9 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render
 from pytz import unicode
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated
+
 from api.models import Post, FollowRelation
 from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
     FollowRelationSerializer
