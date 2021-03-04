@@ -1,4 +1,4 @@
-import React, { Component, } from 'react';
+import React, {Component,} from 'react';
 import {Avatar, Grid} from "@material-ui/core";
 import '../App.css';
 import ReactDOM from "react-dom";
@@ -16,8 +16,8 @@ class Feed extends Component {
                 //Check what completed,editing fields do
                 id: null,
                 username: '',
-                picture:'',
-                caption:'',
+                picture: '',
+                caption: '',
                 completed: false,
             },
             editing: false,
@@ -25,31 +25,25 @@ class Feed extends Component {
         this.fetchPosts = this.fetchPosts.bind(this)
     };
 
-    // this.getFeed();
-    // console.log(postData);
-    // }
-
-
     fetchPosts() {
         fetch('/api/feed/', {
             method: 'GET',
-            headers: {'content-type': 'application/json'}})
-
+            headers: {'content-type': 'application/json'}
+        })
             .then(response => response.json())
             .then(data =>
                 this.setState({
-                        postData: data
+                        postData: data,
                     }
-                ))}
+                ))
+    }
+
     componentDidMount() {
         this.fetchPosts()
     }
 
-
     render() {
-
         const posts = this.state.postData
-
         return (
             <Grid
                 id="feed-grid"
@@ -59,154 +53,36 @@ class Feed extends Component {
                 alignItems="center">
 
                 {posts.map(function (post, index) {
-                {/*const test = () => {*/}
-                {/*    return posts.map((posts, index) => {*/}
-             return (
-
-                <div key={index}>
-                    <Post username={post.username} caption={post.caption}
-                          picture={post.picture}/>
-
-                          <span> {posts.username}</span>
-                         <span> {post.username}</span>
-
-                          </div>
-
-                )})
+                    return (
+                        <Post username={post.username} caption={post.caption}
+                              picture={post.picture} key={index}/>
+                    )
+                })
                 }
-
-
-                        {/*<div className="container-post">*/}
-                        {/*    <div className="post-card">*/}
-                        {/*        <div className="post-header">*/}
-                        {/*            <Avatar*/}
-                        {/*                className="post-avatar"*/}
-                        {/*                alt={posts.username}*/}
-                        {/*                src=""*/}
-                        {/*            />*/}
-                        {/*            <h4>{posts.username}</h4>*/}
-                        {/*        </div>*/}
-                        {/*        <img className="post-image"*/}
-                        {/*             src={posts.picture} alt="picture" />*/}
-                        {/*        <h5 className="post-text"> <strong>{posts.username}:</strong> {posts.caption}</h5>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-
-                        {/*TEST*/}
-                        {/*<span>*/}
-                        {/*{posts.username}*/}
-                        {/*<img src={posts.picture}/>*/}
-                        {/*{posts.picture}*/}
-                        {/*{posts.caption}*/}
-                        {/*    </span>*/}
-
-                {/*{this.getFeed().map(post => (*/}
-                {/*    <Post username={post.username} timestamp={post.timestamp} caption={post.caption}*/}
-                {/*          picture={post.picture}/>*/}
-                {/*))}*/}
-
             </Grid>
         )
     }
 }
 
-function Post({username, caption, picture}) {
+function Post({username, caption, picture, index}) {
 
-    return(
-        <div className="container-post">
-            <div className="post-card">
-                <div className="post-header">
-                    <Avatar
-                        className="post-avatar"
-                        alt="username"
-                        src=""
-                    />
-                    <h4>{username}</h4>
-                </div>
-                <img className="post-image"
-                     src={picture} alt="picture" />
-                <h5 className="post-text"> <strong>{username}:</strong> {caption}</h5>
+    return (
+        <div className="post-card" key={index}>
+            <div className="post-header">
+                <Avatar
+                    className="post-avatar"
+                    alt={username}
+                    src=""
+                />
+                <p className="post-username">{username}</p>
             </div>
+            <img className="post-image"
+                 src={picture} alt="picture"/>
+            <p className="post-text"><strong>{username}:</strong> {caption}</p>
         </div>
     )
 }
 
+export default Feed;
 
-
-
-
-
-
-// This sets the data and nothing else
-
-// componentDidMount() {
-//     fetch('/api/feed/', {
-//         method: 'GET',
-//         headers: {'content-type': 'application/json'}
-//             .then(results=> {
-//                 return results.json();
-//             }).then(data =>{
-//                 let postData = data.results.map((username) =>{
-//                     return(
-//                         <div key = {username.results}></div>
-//                     )
-//                 })
-//                 this.setState({postData: postData});
-//                 console.log("state", this.state.postData);
-//             })
-//     })
-//
-//
-// }
-
-
-
-//This getFeed works for console.log and nothing else
-
-
-// getFeed() {
-//     fetch('/api/feed/', {
-//         method: 'GET',
-//         headers: {'content-type': 'application/json'}
-//     })
-//
-//         .then(response => response.json())
-//         .then(data => {
-//             this.postData = data;
-//             console.log(data)
-//         })
-//         .catch(error => console.log(error))
-// }
-// .then(response => response.json())
-// .then(data => this.setState({postData:data,
-//     postData = data;
-//     this.setState({});
-// })
-// .catch(error => console.log(error)))
-// }
-
-
-//<---------------------OG------------------->
-
-// render() {
-//     return (
-//         <Grid
-//             id="feed-grid"
-//             container
-//             direction="column"
-//             justify="space-between"
-//             alignItems="center"
-//         >
-//
-//             {this.getFeed().map(post => (
-//                 <Post username={post.username} timestamp={post.timestamp} caption={post.caption}
-//                       picture={post.picture}/>
-//             ))}
-//         </Grid>
-//     )
-// }
-// }
-//
-
-export default Feed
 
