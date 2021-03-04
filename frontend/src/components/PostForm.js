@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import ReactDOM from "react-dom";
+import getCookie from '../GlobalFunctions'
+import { useHistory } from 'react-router-dom'
 
 function PostForm() {
     const [image, setImage] = useState("");
@@ -22,30 +24,39 @@ function PostForm() {
         setCaption(e.target.value);
     }
 
+    // Because this is a functional component, the props are not initially available as in other components (ex: LoginForm),
+    // so we set the history using 'react-router-dom's useHistory() and then push using that object in the .then() promise
+    let history = useHistory();
+
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(image);
-        console.log(caption);
-        let form_data = new FormData();
-        form_data.append('image', image);
-        form_data.append('caption', caption);
+        const formData = new FormData();
+        formData.append('picture', image);
+        formData.append('caption', caption);
+
+        const csrftoken = getCookie('csrftoken')
 
         fetch(
             '/api/post/', {
                 method: 'POST',
-                body: JSON.stringify(form_data),
-                headers: {'content-type': 'application/json'}
-                //headers: {'content-type': 'multipart/form-data'}
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                }
             }
         )
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                if (data.success === 'true') {
+                    return history.push('/feed');
+                }
                 const ErrorsList = () => (
                     <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>
                 );
                 const rootElement = document.getElementById("post-response-errors");
-                ReactDOM.render(<ErrorsList/>, rootElement);
+                ReactDOM.render(<ErrorsList />, rootElement);
             })
             .catch(error => console.log(error))
     }
@@ -92,7 +103,7 @@ function PostForm() {
             </div>
             <div className={'text-area'}>
                 <textarea value={caption} onChange={handleCaptionChange} type="text" name="caption"
-                       className={'description-input'} placeholder='Description'/>
+                          className={'description-input'} placeholder='Description'/>
             </div>
             <input className={'post-btn'} type="submit" value="Post"/>
             <div id={"post-response-errors"}/>
