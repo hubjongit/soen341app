@@ -5,8 +5,7 @@ from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
-    caption = models.TextField(blank=True, max_length=200,
-                               error_messages={'invalid': 'Make sure you wrote at most 200 chars!'})
+    caption = models.TextField(max_length=200, error_messages={'invalid': 'Make sure you wrote at most 200 chars!'})
     picture = models.ImageField(upload_to='postimages/', blank=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="posts", on_delete=models.CASCADE)
