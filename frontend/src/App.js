@@ -3,6 +3,7 @@ import './App.css';
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm"
 import Feed from "./components/Feed"
+import PostForm from "./components/PostForm"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
@@ -15,7 +16,8 @@ function App() {
                         <Route path="/feed" component={Feed} />
                         <Route path="/register" component={RegisterForm} />
                         <Route path="/login" component={LoginForm} />
-                        {/*<Route path="/follow" component={LoginForm} />*/}
+                        <Route path="/post" component={PostForm} />
+                        <Route path="/follow" />
                     </Switch>
                 </div>
             </div>
