@@ -4,13 +4,15 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm"
 import Feed from "./components/Feed"
 import PostForm from "./components/PostForm"
+import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-
 function App() {
+
     return (
         <Router>
             <div className="app">
+                <Navbar />
                 <div className="container">
                     <Switch>
                         <Route path="/feed" component={Feed} />
