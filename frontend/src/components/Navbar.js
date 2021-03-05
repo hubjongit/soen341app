@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import SubmitButton from './SubmitButton';
 import LogoutForm from './LogoutForm';
 import {getIsAuthenticated} from '../GlobalFunctions'
@@ -8,7 +8,7 @@ function Navbar() {
     const location = useLocation()
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         getIsAuthenticated((data => {
             setIsAuthenticated(data);
         }));
