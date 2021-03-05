@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import ReactDOM from "react-dom";
-import getCookie from '../GlobalFunctions'
+import { getCookie } from '../GlobalFunctions'
 import { useHistory } from 'react-router-dom'
 
 function PostForm() {
@@ -48,7 +48,6 @@ function PostForm() {
         )
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (data.success === 'true') {
                     return history.push('/feed');
                 }
