@@ -32,7 +32,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    picture = Base64ImageField()
+    image = Base64ImageField()
 
     class Meta:
         model = Post
@@ -50,7 +50,7 @@ class FeedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('username', 'timestamp', 'picture', 'caption')
+        fields = ('username', 'timestamp', 'image', 'caption')
 
 
 class UsernameSerializer(serializers.ModelSerializer):
