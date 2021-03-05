@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import SubmitButton from "./SubmitButton";
 
+
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
