@@ -22,6 +22,9 @@ function Navbar() {
                 </Link>
                 {isAuthenticated ? (
                     <div className="user-status">
+                        <Link to="/post">
+                            <SubmitButton text='New Post'/>
+                        </Link>
                         <LogoutForm/>
                     </div>
                 ) : (
