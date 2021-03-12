@@ -1,18 +1,19 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useLayoutEffect} from 'react';
 import SubmitButton from './SubmitButton';
 import LogoutForm from './LogoutForm';
-import {getIsAuthenticated} from '../GlobalFunctions'
 import {Link, useLocation} from 'react-router-dom';
+import {getIsAuthenticated} from "../GlobalFunctions";
 
-function Navbar() {
+
+function Navbar(props) {
+
     const location = useLocation()
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useLayoutEffect(() => {
         getIsAuthenticated((data => {
-            setIsAuthenticated(data);
+            props.setIsAuthenticated(data);
         }));
-    }, [location]);
+    }, [location, props.setIsAuthenticated]);
 
     return (
         <div className="navbar-container">
@@ -20,7 +21,7 @@ function Navbar() {
                 <Link to="/feed" className="logo">
                     SnowFlake
                 </Link>
-                {isAuthenticated ? (
+                {props.isAuthenticated ? (
                     <div className="user-status">
                         <Link to="/post">
                             <SubmitButton text='New Post'/>

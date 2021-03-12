@@ -1,7 +1,8 @@
 import React from 'react';
 import SubmitButton from './SubmitButton';
 import {getCookie} from "../GlobalFunctions";
-import {useHistory} from 'react-router-dom';
+import {useHistory, Redirect} from 'react-router-dom';
+
 
 function LogoutForm() {
 

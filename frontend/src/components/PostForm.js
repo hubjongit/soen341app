@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import ReactDOM from "react-dom";
-import { getCookie } from '../GlobalFunctions'
-import { useHistory } from 'react-router-dom'
+import {getCookie} from '../GlobalFunctions'
+import {useHistory} from 'react-router-dom'
+
 
 function PostForm() {
     const [image, setImage] = useState("");

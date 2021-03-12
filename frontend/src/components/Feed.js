@@ -1,7 +1,6 @@
 import React, {Component,} from 'react';
 import {Avatar, Grid} from "@material-ui/core";
 import '../App.css';
-import ReactDOM from "react-dom";
 
 
 class Feed extends Component {
