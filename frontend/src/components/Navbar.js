@@ -13,7 +13,7 @@ function Navbar(props) {
         getIsAuthenticated((data => {
             props.setIsAuthenticated(data);
         }));
-    }, [location, props.setIsAuthenticated]);
+    }, [location, props]);
 
     return (
         <div className="navbar-container">
@@ -25,6 +25,9 @@ function Navbar(props) {
                     <div className="user-status">
                         <Link to="/post">
                             <SubmitButton text='New Post'/>
+                        </Link>
+                        <Link to="/follow">
+                            <SubmitButton text='Follow Finder'/>
                         </Link>
                         <LogoutForm/>
                     </div>
