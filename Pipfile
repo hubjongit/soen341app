@@ -7,6 +7,8 @@ name = "pypi"
 django = "==3.1.6"
 djangorestframework = "*"
 pillow = "*"
+django-extra-fields = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

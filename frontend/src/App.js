@@ -1,66 +1,39 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm"
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Feed from "./components/Feed"
+import PostForm from "./components/PostForm"
 import FollowableUser from "./components/FollowableUser";
+import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute'
+import {BrowserRouter as Router, Switch} from 'react-router-dom';
 
 
-/*
 function App() {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
+
+    const wrapperSetIsAuthenticated = useCallback(auth => {
+        setIsAuthenticated(auth);
+    }, [setIsAuthenticated, ]);
+
     return (
         <Router>
             <div className="app">
-                <Switch>
-                    <div className="container">
-
-                        <Route path="/feed"/>
-                        <Route path="/register" component={RegisterForm} />
-                        <Route path="/login" component={LoginForm} />
-                    </div>
-                       <Route path="/follow" component={FollowableUser} />
-                </Switch>
-            </div>
-        </Router>
-    );
-}
-*/
-
-/*
-function App() {
-    return (
-        <Router>
-            <div className="app">
+                <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={wrapperSetIsAuthenticated}/>
                 <div className="container">
                     <Switch>
-                        <Route path="/feed"/>
-                        <Route path="/register" component={RegisterForm} />
-                        <Route path="/login" component={LoginForm} />
-                        <Route path="/follow" component={FollowableUser} />
+                        <ProtectedRoute path="/login" component={LoginForm} isAuthenticated={!isAuthenticated} redirect={'/feed'} />
+                        <ProtectedRoute path="/register" component={RegisterForm} isAuthenticated={!isAuthenticated} redirect={'/feed'} />
+                        <ProtectedRoute path="/feed" component={Feed} isAuthenticated={isAuthenticated} redirect={'/login'} />
+                        <ProtectedRoute path="/post" component={PostForm} isAuthenticated={isAuthenticated} redirect={'/login'}  />
+                        <ProtectedRoute path="/follow" component={FollowableUser} isAuthenticated={isAuthenticated} redirect={'/login'}  />
                     </Switch>
                 </div>
             </div>
         </Router>
     );
 }
- */
-
-function App() {
-    return (
-        <Router>
-            <div className="app">
-                <div className="container">
-                    <Switch>
-                        <Route path="/feed"/>
-                        <Route path="/register" component={RegisterForm} />
-                        <Route path="/login" component={LoginForm} />
-                    </Switch>
-                </div>
-                <Route exact path="/follow" component={FollowableUser} />
-            </div>
-        </Router>
-    );
-}
-
 
 export default App;

@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from api.models import Post
+from drf_extra_fields.fields import Base64ImageField
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -31,6 +32,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    image = Base64ImageField()
+
     class Meta:
         model = Post
         fields = '__all__'
@@ -47,7 +50,7 @@ class FeedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('username', 'timestamp', 'picture', 'caption')
+        fields = ('username', 'timestamp', 'image', 'caption')
 
 
 class UsernameSerializer(serializers.ModelSerializer):

@@ -1,11 +1,11 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render
 from pytz import unicode
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
+
 from api.models import Post, FollowRelation
 from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
     FollowRelationSerializer
@@ -14,6 +14,8 @@ from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer,
 # Create your views here.
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def api_overview(request):
     api_response = "The REST framework is working."
     return Response(api_response)
@@ -32,8 +34,11 @@ def api_register(request):
 
 
 @api_view(['POST'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def api_post(request):
     if request.method == "POST":
+        request.data.update({'user': request.user.id})
         form = PostSerializer(data=request.data)
         if form.is_valid():
             form.save()
@@ -58,6 +63,8 @@ def api_login(request):
 
 
 @api_view(['POST'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def api_logout(request):
     if request.method == "POST":
         logout(request)
@@ -74,6 +81,8 @@ def api_getauth(request):
 
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def api_feed(request):
     following_objects = request.user.following.all()
     following = [following_obj.user_to_follow for following_obj in following_objects]
@@ -84,6 +93,8 @@ def api_feed(request):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def api_follow(request):
     if request.method == "GET":
         following_objects = request.user.following.all()
