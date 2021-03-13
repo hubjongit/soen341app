@@ -28,9 +28,11 @@ class FollowFinder extends React.Component {
     render() {
         const users = this.state.followUserData
         return (
-            <div className={'user-grid'}>
+            <div className='user-grid'>
                 {users.map((data, index) =>
-                    <FollowNode username={data.username}/>)}
+                    <FollowNode username={data.username}/>)
+                }
+                <div id='post-response-errors' className='display-none' />
             </div>
         )
     }
@@ -69,8 +71,8 @@ function FollowNode({username}) {
                 const ErrorsList = () => (
                     <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>
                 );
-                // TODO temp id #root, check if any errors in first place...
-                const rootElement = document.getElementById("root");
+                const rootElement = document.getElementById('post-response-errors');
+                rootElement.classList.remove('display-none');
                 ReactDOM.render(<ErrorsList />, rootElement);
             })
             .catch(error => console.log(error))
