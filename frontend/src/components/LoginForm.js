@@ -72,11 +72,13 @@ class LoginForm extends React.Component {
                 />
                 <SubmitButton
                     type='submit'
+                    classes='submit-button-padding'
                     text='Login'
                 />
                 <Link to ="/register">
                 <SubmitButton
                     type='submit'
+                    classes='submit-button-padding'
                     text='Register'
                 />
                 </Link>
