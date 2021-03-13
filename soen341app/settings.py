@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'soen341app.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 tunnel = sshtunnel.SSHTunnelForwarder(
-    ('ssh.pythonanywhere.com'), ssh_username='soen341app', ssh_password='Concordia1',
+    ('ssh.pythonanywhere.com'), ssh_username='soen341app', ssh_password=SSH_PASSWORD,
     remote_bind_address=('soen341app.mysql.pythonanywhere-services.com', 3306)
 )
 
@@ -91,6 +91,9 @@ DATABASES = {
         'PASSWORD': 'snowflake',
         'HOST': '127.0.0.1',
         'PORT': tunnel.local_bind_port,
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
