@@ -18,18 +18,18 @@ function Navbar(props) {
     return (
         <div className="navbar-container">
             <div className="navbar">
-                <Link to="/feed" className="logo">
+                <Link to="/feed" className="logo mr-auto">
                     SnowFlake
                 </Link>
                 {props.isAuthenticated ? (
-                    <div className="user-status">
+                    <div className="user-status ml-auto">
                         <Link to="/post">
                             <SubmitButton text='New Post'/>
                         </Link>
                         <LogoutForm/>
                     </div>
                 ) : (
-                    <div className="user-status">
+                    <div className="user-status ml-auto">
                         <Link to="/login">
                             <SubmitButton text='Login'/>
                         </Link>

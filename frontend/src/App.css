@@ -46,7 +46,7 @@ form.input > input {
     padding-top: 1em;
 }
 
-.submit-button {
+.submit-button-padding {
     padding-top: 8px;
 }
 
@@ -64,57 +64,64 @@ form.input > input {
     cursor: pointer;
 }
 
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
 
 /*============== CSS FOR THE FOLLOW USER UI ==============*/
 
-.user-grid{
-    margin-left: 10%;
-    margin-right: 10%;
+.user-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 20px;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    justify-content: center;
+    justify-items: center;
+    max-width: 80%;
+    margin: 3em auto 0;
 }
 
-.user-block {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 20px;
+.follow-node {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    width: 5em;
+    height: 5em;
+    padding: 20%;
     border-radius: 25px;
     background-color: #F5F5F5;
-    padding: 20px;
-    width: 125px;
-    height: 125px;
-    position: relative;
-    font-size: 17px;
-}
-
-.user-block:hover {
-    background-color: #e5e4e2;
-}
-
-.user-block:hover .follow-btn{
-    visibility: visible;
-}
-
-.user-block-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0.6em;
+    font-size: 20px;
     text-align: center;
 }
 
-.follow-btn {
-    background-color: #f7bfbe;
+.follow-button {
+    background-color: #fcba03;
     border: none;
     border-radius: 25px;
-    color: #808080;
-    padding: 6px 10px;
+    color: white;
+    padding: 10% 20%;
     text-align: center;
     opacity: 0.6;
     visibility: hidden;
 }
 
-.follow-btn:hover {
+.follow-node:hover .follow-button {
+    visibility: visible;
+}
+
+.follow-button:hover {
+    opacity: 1;
+}
+
+.follow-node.follow-node-clicked {
+    background-color: #97e68e;
+}
+
+.follow-node.follow-node-clicked > .follow-button {
+    visibility: visible;
     opacity: 1;
 }
 
@@ -282,19 +289,18 @@ form.input > input {
 
 /*============== CSS FOR THE NAVBAR ==============*/
 
-.navbar {
-    width: 960px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+.navbar-container {
+    border-bottom: 3px solid lightblue;
+    height: 4em;
 }
 
-.navbar-container {
-    padding: 1px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid lightblue;
+.navbar {
+    display: grid;
+    height: 100%;
+    margin: 0 10em;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
 
 .logo {
@@ -309,5 +315,5 @@ form.input > input {
 }
 
 .user-status div:first-child {
-    margin-right: 15px;
+    margin-right: 1em;
 }
