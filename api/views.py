@@ -100,7 +100,7 @@ def api_follow(request):
         following_objects = request.user.following.all()
         following = [following_obj.user_to_follow for following_obj in following_objects]
         following.append(request.user)
-        users = User.objects.all()
+        users = User.objects.filter(is_superuser=False)
         new_users = [user for user in users if user not in following]
         new_users_serializer = UsernameSerializer(new_users, many=True)
         return Response(new_users_serializer.data)

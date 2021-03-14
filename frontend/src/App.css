@@ -39,14 +39,18 @@ form.input > input {
     margin-top: 0.5em;
 }
 
+.display-none {
+    display: none;
+}
+
 #post-response-errors > ul {
-    font-size: 12px;
     display: table;
+    font-size: 12px;
     margin: 0 auto;
     padding-top: 1em;
 }
 
-.submit-button {
+.submit-button-padding {
     padding-top: 8px;
 }
 
@@ -63,6 +67,68 @@ form.input > input {
     background: #f2dbd4;
     cursor: pointer;
 }
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+/*============== CSS FOR THE FOLLOW USER UI ==============*/
+
+.user-grid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    justify-content: center;
+    justify-items: center;
+    max-width: 80%;
+    margin: 3em auto 0;
+}
+
+.follow-node {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    width: 5em;
+    height: 5em;
+    padding: 20%;
+    border-radius: 25px;
+    background-color: #F5F5F5;
+    margin: 0.6em;
+    font-size: 20px;
+    text-align: center;
+}
+
+.follow-button {
+    background-color: #fcba03;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    padding: 10% 20%;
+    text-align: center;
+    opacity: 0.6;
+    visibility: hidden;
+}
+
+.follow-node:hover .follow-button {
+    visibility: visible;
+}
+
+.follow-button:hover {
+    opacity: 1;
+}
+
+.follow-node.follow-node-clicked {
+    background-color: #97e68e;
+}
+
+.follow-node.follow-node-clicked > .follow-button {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 /*============== CSS FOR THE FEED POST ==============*/
 
@@ -122,7 +188,6 @@ form.input > input {
 #sub {
     margin-top: -10px;
     color: #777;
-    marginTop: '5px'
 }
 
 .box-upload {
@@ -228,23 +293,22 @@ form.input > input {
 
 /*============== CSS FOR THE NAVBAR ==============*/
 
-.navbar {
-    width: 960px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+.navbar-container {
+    border-bottom: 3px solid lightblue;
+    height: 4em;
 }
 
-.navbar-container {
-    padding: 1px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid lightblue;
+.navbar {
+    display: grid;
+    height: 100%;
+    margin: 0 10em;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
 
 .logo {
-    font-family: "Brush Script MT";
+    font-family: "Brush Script MT", serif;
     font-size: 32px;
     text-decoration: none !important;
     text-decoration-color: black;
@@ -255,5 +319,5 @@ form.input > input {
 }
 
 .user-status div:first-child {
-    margin-right: 15px;
+    margin-right: 1em;
 }
