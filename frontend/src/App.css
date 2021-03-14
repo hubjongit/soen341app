@@ -321,3 +321,19 @@ form.input > input {
 .user-status div:first-child {
     margin-right: 1em;
 }
+
+
+/*============== CSS FOR COMMENTS SECTION ==============*/
+
+.img-comments-container {
+    position: relative;
+}
+
+.comments-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+}
+

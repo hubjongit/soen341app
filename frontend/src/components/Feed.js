@@ -1,5 +1,6 @@
 import React, {Component,} from 'react';
 import {Avatar, Grid} from "@material-ui/core";
+import Comments from './Comments'
 import '../App.css';
 
 
@@ -73,8 +74,10 @@ function Post({username, caption, image, index}) {
                 />
                 <p className="post-username">{username}</p>
             </div>
-            <img className="post-image"
-                 src={image}  alt="" />
+            <div className='img-comments-container'>
+                <Comments />
+                <img className="post-image" src={image} alt="" />
+            </div>
             <p className="post-text"><strong>{username}:</strong> {caption}</p>
         </div>
     )
