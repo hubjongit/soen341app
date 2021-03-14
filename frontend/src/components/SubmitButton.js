@@ -4,7 +4,7 @@ class SubmitButton extends React.Component {
 
     render() {
         return(
-            <div className="submit-button">
+            <div className={this.props.classes}>
                 <button
                     className='btn'
                     type={this.props.type}

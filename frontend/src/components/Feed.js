@@ -21,7 +21,7 @@ class Feed extends Component {
             },
             editing: false,
         }
-        this.fetchPosts = this.fetchPosts.bind(this)
+        this.fetchPosts = this.fetchPosts.bind(this);
     };
 
     fetchPosts() {
@@ -31,10 +31,8 @@ class Feed extends Component {
         })
             .then(response => response.json())
             .then(data =>
-                this.setState({
-                        postData: data,
-                    }
-                ))
+                this.setState({postData: data,})
+            )
     }
 
     componentDidMount() {

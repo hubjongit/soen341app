@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 from soen341app.secret_settings import *
+import sshtunnel
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,10 +76,24 @@ WSGI_APPLICATION = 'soen341app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+tunnel = sshtunnel.SSHTunnelForwarder(
+    ('ssh.pythonanywhere.com'), ssh_username='soen341app', ssh_password=SSH_PASSWORD,
+    remote_bind_address=('soen341app.mysql.pythonanywhere-services.com', 3306)
+)
+
+tunnel.start()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'soen341app$soen341app',
+        'USER': 'soen341app',
+        'PASSWORD': 'snowflake',
+        'HOST': '127.0.0.1',
+        'PORT': tunnel.local_bind_port,
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 

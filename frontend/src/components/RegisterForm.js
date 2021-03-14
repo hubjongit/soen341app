@@ -77,6 +77,7 @@ class RegisterForm extends React.Component {
                 />
                 <SubmitButton
                     type='submit'
+                    classes='submit-button-padding'
                     text='Register'
                 />
                 <div id="post-response-errors"/>
