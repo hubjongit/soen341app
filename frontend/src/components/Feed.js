@@ -74,7 +74,7 @@ function Post({username, caption, image, index}) {
                 <p className="post-username">{username}</p>
             </div>
             <img className="post-image"
-                 src={image} alt="image"/>
+                 src={image}  alt="" />
             <p className="post-text"><strong>{username}:</strong> {caption}</p>
         </div>
     )
