@@ -9,6 +9,8 @@ djangorestframework = "*"
 pillow = "*"
 django-extra-fields = "*"
 psycopg2-binary = "*"
+mysqlclient = "*"
+sshtunnel = "*"
 
 [dev-packages]
 
