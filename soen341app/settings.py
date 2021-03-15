@@ -9,10 +9,13 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import sys
 from pathlib import Path
 import os
-from soen341app.secret_settings import *
+if os.getenv('TRAVIS', None):
+    pass
+else:
+    from soen341app.secret_settings import *
 import sshtunnel
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = PRIVATE_SECRET_KEY
+if os.getenv('TRAVIS', None):
+    SECRET_KEY = os.environ['PRIVATE_SECRET_KEY']
+else:
+    SECRET_KEY = PRIVATE_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,26 +82,33 @@ WSGI_APPLICATION = 'soen341app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-tunnel = sshtunnel.SSHTunnelForwarder(
-    ('ssh.pythonanywhere.com'), ssh_username='soen341app', ssh_password=SSH_PASSWORD,
-    remote_bind_address=('soen341app.mysql.pythonanywhere-services.com', 3306)
-)
-
-tunnel.start()
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'soen341app$soen341app',
-        'USER': 'soen341app',
-        'PASSWORD': 'snowflake',
-        'HOST': '127.0.0.1',
-        'PORT': tunnel.local_bind_port,
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+if (os.getenv('TRAVIS', None) or 'test' in sys.argv):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+        }
     }
-}
+else:
+    tunnel = sshtunnel.SSHTunnelForwarder(
+        ('ssh.pythonanywhere.com'), ssh_username='soen341app', ssh_password=SSH_PASSWORD,
+        remote_bind_address=('soen341app.mysql.pythonanywhere-services.com', 3306)
+    )
+
+    tunnel.start()
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'soen341app$soen341app',
+            'USER': 'soen341app',
+            'PASSWORD': 'snowflake',
+            'HOST': '127.0.0.1',
+            'PORT': tunnel.local_bind_port,
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
