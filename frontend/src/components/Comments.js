@@ -1,78 +1,38 @@
 import React from "react";
 import '../App.css';
 import {Avatar} from "@material-ui/core";
-import SubmitButton from "./SubmitButton";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from '@fortawesome/free-solid-svg-icons'
+
 
 class Comments extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            commentData: this.props.comments,
-        }
-    }
 
     render() {
-        const comments = this.state;
         return (
-                {comments.map(function (comment, index) {
-                    return (
-                        <Comment username={comment.username} comment={comment.comment}
-                                 image={comment.image} id={index}/>
-                    )
-                })}
-        )
-    }
-}
+            <div className="comments-card">
 
-function Comment({id, username, comment,image}){
-    return (
+                <img className="comments-image" src={this.props.image} alt=""/>
 
-        <div className="comment-card">
-            {/*<div className="comment-close"><Close fontSize="large"/></div>*/}
-            <img className="comment-image" src={image} alt=""/>
-
-            <div className="comments-section">
-
-                <div className="comments-header">
-                    <Avatar
-                        className="comments-avatar"
-                        alt={username}
-                        src=""
-                    />
-                    <h5>{username}</h5>
-                </div>
-
-                <div className="comment-replies" key={id}>
-                    <Avatar
-                        className="comments-avatar"
-                        alt={username}
-                        src=""
-                    />
-                    <h5>{username} : {comment}</h5>
-                </div>
-
-                <div className="comment-text">
-
-                    <form
-                        //onSubmit={this.onSubmit}
-                        className="comments-form">
-                        <input
-                            name='comment'
-                            type='text'
-                            placeholder='Type a new comment'
-                            //   onChange={this.onChange}
+                <div className='comments-content'>
+                    <div className="comments-header">
+                        <Avatar
+                            className="comments-avatar"
+                            alt={this.props.username}
+                            src=""
                         />
-                        <SubmitButton
-                            type='submit'
-                            classes='submit-button-padding'
-                            text='Comment'
-                        />
-                    </form>
+                        <p className=''>{this.props.username}</p>
+                        <FontAwesomeIcon icon={faTimes} className='comments-close ml-auto' onClick={this.props.handleDisableShowComments}/>
+                    </div>
 
+                    {this.props.comments.map((comment) => {
+                        return (
+                            <Comment username={comment.username} comment={comment.content}/>
+                        )
+                    })}
                 </div>
             </div>
-        </div>
-    );
+        )
+    }
 }
 
 function Comment({username, comment}) {
@@ -80,7 +40,7 @@ function Comment({username, comment}) {
     return (
         <div className='comment-box'>
             <Avatar
-                className="post-avatar"
+                className="comment-avatar"
                 alt={username}
                 src=""
             />
