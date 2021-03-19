@@ -88,6 +88,7 @@ class Feed extends React.Component {
                               image={this.state.commentsModalState.postImage}
                               comments={this.state.commentsModalState.commentData}
                               handleDisableShowComments={this.disableShowCommentsModal}
+                              forceRerender={this.forceUpdate}
                     />
                 </Modal>
             </div>

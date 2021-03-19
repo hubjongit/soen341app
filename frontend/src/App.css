@@ -358,6 +358,8 @@ form.input > input {
 }
 
 .comments-content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     background-color: #ffffff;
     padding-left: 10px;
@@ -411,4 +413,19 @@ form.input > input {
     color: #292929;
     margin-top: 0;
     margin-bottom: 10px;
+}
+
+.comments-form {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.comments-form-textarea {
+    width: 100%;
+    margin-right: 10px;
+}
+
+.comments-form-btn {
+    margin-right: 10px;
 }
