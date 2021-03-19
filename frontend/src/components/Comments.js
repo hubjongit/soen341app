@@ -39,8 +39,17 @@ class Comments extends React.Component {
             .then(response => response.json())
             .then(data => {
                 if (data.success === 'true') {
-                    // return this.props.history.push('/feed')
-                    return this.props.forceRerender
+                    this.setState({newComment: ""});
+                    const commentsContainer = document.getElementById("comments-comment-container");
+                    this.props.comments.push(data.comment);
+                    const updatedComments =
+                        this.props.comments.map((comment) => {
+                            return (
+                                <Comment username={comment.username} comment={comment.content}/>
+                            )
+                        })
+                    ReactDOM.render(updatedComments, commentsContainer);
+                    return;
                 }
                 const ErrorsList = () => (
                     <ul>{data.errors.map(error => <li key={error}> {error} </li>)}</ul>
@@ -69,11 +78,13 @@ class Comments extends React.Component {
                                          onClick={this.props.handleDisableShowComments}/>
                     </div>
 
-                    {this.props.comments.map((comment) => {
-                        return (
-                            <Comment username={comment.username} comment={comment.content}/>
-                        )
-                    })}
+                    <div id='comments-comment-container'>
+                        {this.props.comments.map((comment) => {
+                            return (
+                                <Comment username={comment.username} comment={comment.content}/>
+                            )
+                        })}
+                    </div>
 
                     <form onSubmit={this.handleSubmit} className='comments-form'>
                         <textarea value={this.state.newComment}

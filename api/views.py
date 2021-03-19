@@ -55,7 +55,12 @@ def api_comment(request):
         form = CommentSerializer(data=request.data)
         if form.is_valid():
             form.save()
-            return Response({"success": "true"})
+            comment = {
+                'content': unicode(form.validated_data.get('content')),
+                'timestamp': unicode(form.validated_data.get('timestamp')),
+                'username': unicode(form.validated_data.get('user')),
+            }
+            return Response({"success": "true", "comment": comment})
         error_messages = [one_error for error in form.errors.values() for one_error in error]
         return Response({"errors": error_messages})
 

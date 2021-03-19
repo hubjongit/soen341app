@@ -175,6 +175,10 @@ form.input > input {
     padding-left: 10px;
 }
 
+.post-comments-button {
+    font-size: 20px;
+}
+
 .post-avatar {
     margin-right: 10px;
 }
@@ -337,8 +341,8 @@ form.input > input {
 .modal-container {
     position: relative;
     width: 65%;
-    height: 80%;
-    margin: 10% auto 0 auto;
+    height: 60%;
+    margin: 20% auto 0 auto;
     justify-content: center;
 }
 
@@ -379,6 +383,7 @@ form.input > input {
 }
 
 .comments-close {
+    font-size: 22px;
     margin-right: 10px;
     color: #000000;
 }
