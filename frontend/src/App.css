@@ -162,6 +162,15 @@ form.input > input {
     border-bottom: 3px solid #add8e6;
 }
 
+.post-bottom-section {
+    display: grid;
+    margin: 0 1em;
+    justify-content: center;
+    grid-gap: 20px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
 .post-text {
     padding-left: 10px;
 }
@@ -333,14 +342,14 @@ form.input > input {
     z-index: 1;
 }
 
-.comment-close {
+.comments-close {
     color: #F0F0F0;
     position: absolute;
     right:15px;
     top:15px;
 }
 
-.comment-card {
+.comments-card {
     font-family: 'Roboto Light', sans-serif;
     border-radius: 1em;
     background-color: #F0F0F0;
@@ -350,41 +359,22 @@ form.input > input {
     margin-top: 200px;
     display:flex;
 }
-.comment-section {
+.comments-section {
     width:100%;
 }
 
-.comment-avatar {
+.comments-avatar {
     margin-right: 10px;
 }
 
-.comment-header{
+.comments-header {
     display: flex;
     padding: 0.5em;
     align-items: center;
     border-bottom: 1px solid rgba(220,220,220,0.7);
 }
 
-.comment-replies {
-    display: flex;
-    padding: 0.5em;
-    align-items: center;
-}
-
-.comment-text {
-    padding: 0.5em;
-    align-items: center;
-    margin-top: 400px;
-}
-
-.comment-image {
-    height: 600px;
-    width: 400px;
-    object-fit: cover;
-    border-radius: 1em;
-}
-
-.comment-form {
+.comments-form {
     display: flex;
     flex: 1;
     font-family: 'Roboto Light', sans-serif;
@@ -392,4 +382,30 @@ form.input > input {
     color: #292929;
     box-sizing: border-box;
     width: 100%;
+}
+
+.comment-box {
+    display: grid;
+    margin: 0 1em;
+    justify-content: center;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    border-bottom: 3px solid #add8e6;
+}
+
+.comment-box-username {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.comment-box-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #292929;
+    margin-top: 0;
+    margin-bottom: 10px;
 }

@@ -1,43 +1,15 @@
 import React from "react";
 import '../App.css';
-import {Avatar, Grid} from "@material-ui/core";
+import {Avatar} from "@material-ui/core";
 import SubmitButton from "./SubmitButton";
 
 class Comments extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            commentData: this.props.commentsData,
+            commentData: this.props.comments,
         }
     }
-
-
-    // fetchComments() {
-    //     fetch('/api/comment/', {
-    //         method: 'GET',
-    //         headers: {'content-type': 'application/json'}
-    //     })
-    //         .then(response => response.json())
-    //         .then(data =>
-    //             this.setState({commentData: data,})
-    //         )
-    // }
-
-    //    componentDidMount() {
-    //     this.fetchcommentData()
-    // }
-    //
-
-
-
-//     render() {
-//         return (
-//             <div className='comments-overlay'>
-//                 <p>Hello.</p>
-//             </div>
-//         )
-//     }
-// }
 
     render() {
         const comments = this.state;
@@ -59,11 +31,11 @@ function Comment({id, username, comment,image}){
             {/*<div className="comment-close"><Close fontSize="large"/></div>*/}
             <img className="comment-image" src={image} alt=""/>
 
-            <div className="comment-section">
+            <div className="comments-section">
 
-                <div className="comment-header">
+                <div className="comments-header">
                     <Avatar
-                        className="comment-avatar"
+                        className="comments-avatar"
                         alt={username}
                         src=""
                     />
@@ -72,7 +44,7 @@ function Comment({id, username, comment,image}){
 
                 <div className="comment-replies" key={id}>
                     <Avatar
-                        className="comment-avatar"
+                        className="comments-avatar"
                         alt={username}
                         src=""
                     />
@@ -83,7 +55,7 @@ function Comment({id, username, comment,image}){
 
                     <form
                         //onSubmit={this.onSubmit}
-                        className="comment-form">
+                        className="comments-form">
                         <input
                             name='comment'
                             type='text'
@@ -101,6 +73,23 @@ function Comment({id, username, comment,image}){
             </div>
         </div>
     );
+}
+
+function Comment({username, comment}) {
+
+    return (
+        <div className='comment-box'>
+            <Avatar
+                className="post-avatar"
+                alt={username}
+                src=""
+            />
+            <div className='mr-auto'>
+                <p className='comment-box-username'>{username}</p>
+                <p className='comment-box-text'>{comment}</p>
+            </div>
+        </div>
+    )
 }
 
 export default Comments;
