@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from api.models import Post
+from api.models import Post, Comment
 from drf_extra_fields.fields import Base64ImageField
 
 
@@ -44,13 +44,24 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %I:%M %p", required=False)
+
+    class Meta:
+        model = Comment
+        fields = ('post', 'user', 'username', 'timestamp', 'content')
+        extra_kwargs = {'post': {'write_only': True}, 'user': {'write_only': True}}
+
+
 class FeedSerializer(serializers.ModelSerializer):
     timestamp = serializers.DateTimeField(format="%d-%b-%Y, %H:%M", required=False)
     username = serializers.ReadOnlyField(source='user.username')
+    comments = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post
-        fields = ('username', 'timestamp', 'image', 'caption')
+        fields = ('id', 'username', 'timestamp', 'image', 'caption', 'comments')
 
 
 class UsernameSerializer(serializers.ModelSerializer):
@@ -61,3 +72,4 @@ class UsernameSerializer(serializers.ModelSerializer):
 
 class FollowRelationSerializer(serializers.Serializer):
     user_to_follow = serializers.CharField()
+

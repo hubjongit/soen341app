@@ -5,10 +5,9 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
 from api.models import Post, FollowRelation
 from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
-    FollowRelationSerializer
+    FollowRelationSerializer, CommentSerializer
 
 
 # Create your views here.
@@ -40,6 +39,20 @@ def api_post(request):
     if request.method == "POST":
         request.data.update({'user': request.user.id})
         form = PostSerializer(data=request.data)
+        if form.is_valid():
+            form.save()
+            return Response({"success": "true"})
+        error_messages = [one_error for error in form.errors.values() for one_error in error]
+        return Response({"errors": error_messages})
+
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def api_comment(request):
+    if request.method == "POST":
+        request.data.update({'user': request.user.id})
+        form = CommentSerializer(data=request.data)
         if form.is_valid():
             form.save()
             return Response({"success": "true"})
