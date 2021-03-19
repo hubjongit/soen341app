@@ -1,5 +1,7 @@
 import React, {Component,} from 'react';
 import {Avatar, Grid} from "@material-ui/core";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faComments} from '@fortawesome/free-solid-svg-icons'
 import '../App.css';
 
 
@@ -63,6 +65,10 @@ class Feed extends Component {
 
 function Post({username, caption, image, index}) {
 
+    function handleToggleComments() {
+        
+    }
+
     return (
         <div className="post-card" key={index}>
             <div className="post-header">
@@ -75,7 +81,10 @@ function Post({username, caption, image, index}) {
             </div>
             <img className="post-image"
                  src={image}  alt="" />
-            <p className="post-text"><strong>{username}:</strong> {caption}</p>
+            <div className='post-bottom-section'>
+                <p className='post-text mr-auto'><strong>{username}:</strong> {caption}</p>
+                <FontAwesomeIcon icon={faComments} className='ml-auto' onClick={() => handleToggleComments()} />
+            </div>
         </div>
     )
 }

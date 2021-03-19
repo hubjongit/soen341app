@@ -162,6 +162,15 @@ form.input > input {
     border-bottom: 3px solid #add8e6;
 }
 
+.post-bottom-section {
+    display: grid;
+    margin: 0 1em;
+    justify-content: center;
+    grid-gap: 20px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
 .post-text {
     padding-left: 10px;
 }
