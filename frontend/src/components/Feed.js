@@ -8,19 +8,8 @@ class Feed extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = ({username: '', image: '', caption: ''})
         this.state = {
             postData: [],
-            activeItem: {
-
-                //Check what completed,editing fields do
-                id: null,
-                username: '',
-                image: '',
-                caption: '',
-                completed: false,
-            },
-            editing: false,
         }
         this.fetchPosts = this.fetchPosts.bind(this);
     };
@@ -55,8 +44,12 @@ class Feed extends Component {
                         <Post username={post.username} caption={post.caption}
                               image={post.image} key={index}/>
                     )
-                })
-                }
+                })}
+
+                {/*<div className="comments-overlay">*/}
+                {/*<Comments/>*/}
+                {/*</div>*/}
+
             </Grid>
         )
     }
@@ -74,11 +67,11 @@ function Post({username, caption, image, index}) {
                 />
                 <p className="post-username">{username}</p>
             </div>
-            <div className='img-comments-container'>
-                <Comments />
-                <img className="post-image" src={image} alt="" />
-            </div>
+            <img className="post-image" src={image} alt="" />
             <p className="post-text"><strong>{username}:</strong> {caption}</p>
+            <div className="comments-overlay">
+            <Comments/>
+            </div>
         </div>
     )
 }

@@ -325,15 +325,71 @@ form.input > input {
 
 /*============== CSS FOR COMMENTS SECTION ==============*/
 
-.img-comments-container {
-    position: relative;
-}
-
 .comments-overlay {
-    position: absolute;
+    position: static;
     height: 100%;
     width: 100%;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(128,128,128,0.75);
     z-index: 1;
 }
 
+.comment-close {
+    color: #F0F0F0;
+    position: absolute;
+    right:15px;
+    top:15px;
+}
+
+.comment-card {
+    font-family: 'Roboto Light', sans-serif;
+    border-radius: 1em;
+    background-color: #F0F0F0;
+    width: 800px;
+    height: 600px;
+    margin: auto;
+    margin-top: 200px;
+    display:flex;
+}
+.comment-section {
+    width:100%;
+}
+
+.comment-avatar {
+    margin-right: 10px;
+}
+
+.comment-header{
+    display: flex;
+    padding: 0.5em;
+    align-items: center;
+    border-bottom: 1px solid rgba(220,220,220,0.7);
+}
+
+.comment-replies {
+    display: flex;
+    padding: 0.5em;
+    align-items: center;
+}
+
+.comment-text {
+    padding: 0.5em;
+    align-items: center;
+    margin-top: 400px;
+}
+
+.comment-image {
+    height: 600px;
+    width: 400px;
+    object-fit: cover;
+    border-radius: 1em;
+}
+
+.comment-form {
+    display: flex;
+    flex: 1;
+    font-family: 'Roboto Light', sans-serif;
+    font-size: 28px;
+    color: #292929;
+    box-sizing: border-box;
+    width: 100%;
+}
