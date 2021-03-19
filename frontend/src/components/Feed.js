@@ -110,7 +110,7 @@ function Post({id, username, caption, image, comments, handleEnableShowComments,
             <img className="post-image" src={image} alt=""/>
             <div className='post-bottom-section'>
                 <p className='post-text mr-auto'><strong>{username}:</strong> {caption}</p>
-                <FontAwesomeIcon icon={faComments} className='ml-auto'
+                <FontAwesomeIcon icon={faComments} className='post-comments-button ml-auto'
                                  onClick={() => handleEnableShowComments(id, username, image, comments)}/>
             </div>
         </div>
