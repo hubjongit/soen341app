@@ -15,14 +15,15 @@ Snowflake is a web-based social network platform that enables users to share pic
 * Leave comments on a posted picture
 
 #### Additional Feature
-* Creating and accessing a personal user account
 * Reporting a picture or description
   * Users can report a picture they feel uncomfortable with
   * Administrators monitor, review, and handle complaints quickly
+    * Handling can be done by dismissing the report or deleting the post
 
 #### Future Features
 * Display number of comments of a picture
-* Deleting pictures as a user and/or administrator
+* Deleting pictures as a user
+* Creating and accessing a personal user account
 
 ## Application Technology (Languages, Frameworks, Techniques)
 
@@ -46,9 +47,7 @@ Snowflake is a web-based social network platform that enables users to share pic
 <details>
 <summary>Database</summary>
 
-* MongoDB for organized and easily-manipulatable data in JSON formats
-* PyMongo as the MangoDB implementation on the Python backend
-* Cloud-ready technology
+* MySQL for organized and easily-manipulatable data
 
 </details>
 
@@ -58,7 +57,6 @@ Snowflake is a web-based social network platform that enables users to share pic
 The following summarize the technology that will likely be used when deploying the web-application to a Cloud server for public access
 
 * PythonAnywhere hosting service for all-in-one deployment
-* MongoDB Atlas as the Cloud-based database hosting provider
 
 </details>
 
