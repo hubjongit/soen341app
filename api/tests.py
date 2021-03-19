@@ -105,7 +105,7 @@ class CommentTest(TestCase):
         settings.MEDIA_ROOT = tempfile.mkdtemp()
         self.user = User.objects.create_user(username='travis', password='Concordia.1')
         self.client.login(username='travis', password='Concordia.1')
-        self.image = SimpleUploadedFile(name='test_image.jpg', content=open('media/aq.jpg', 'rb').read(),
+        self.image = SimpleUploadedFile(name='test_image.jpg', content=open('media/travis_test.png', 'rb').read(),
                                         content_type='image/jpeg')
         self.post = Post.objects.create(image=self.image, caption="post 1", user=self.user)
         self.obj = Comment.objects.create(post=self.post, user=self.user, content="my comment")
