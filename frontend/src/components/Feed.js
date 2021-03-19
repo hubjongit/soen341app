@@ -79,8 +79,7 @@ function Post({username, caption, image, index}) {
                 />
                 <p className="post-username">{username}</p>
             </div>
-            <img className="post-image"
-                 src={image}  alt="" />
+            <img className="post-image" src={image} alt="" />
             <div className='post-bottom-section'>
                 <p className='post-text mr-auto'><strong>{username}:</strong> {caption}</p>
                 <FontAwesomeIcon icon={faComments} className='ml-auto' onClick={() => handleToggleComments()} />
