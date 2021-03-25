@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from api.models import Post, Comment
+from api.models import Post, Comment, Report
 from drf_extra_fields.fields import Base64ImageField
 
 
@@ -72,4 +72,18 @@ class UsernameSerializer(serializers.ModelSerializer):
 
 class FollowRelationSerializer(serializers.Serializer):
     user_to_follow = serializers.CharField()
+
+
+class ReportSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %I:%M %p", required=False)
+    report_reason_value = serializers.ReadOnlyField(source='get_report_reason_display')
+
+    class Meta:
+        model = Report
+        fields = ('id', 'report_reason', 'report_reason_value', 'post', 'user', 'username', 'timestamp', 'content')
+        extra_kwargs = {'post': {'write_only': True}, 'user': {'write_only': True},
+                        'report_reason': {'write_only': True}}
+
+
 
