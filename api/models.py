@@ -40,3 +40,25 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{0} commented on post_id {1}".format(self.user.username, self.post.id)
+
+
+class Report(models.Model):
+    report_reason_choices = [
+        (1, 'Spam'),
+        (2, 'Violence'),
+        (3, 'Harassment'),
+        (4, 'False Information'),
+        (5, 'Hate Speech'),
+    ]
+    report_reason = models.IntegerField(choices=report_reason_choices, default=1, )
+    post = models.ForeignKey(Post, related_name="reports", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="reports", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True, )
+    content = models.TextField(max_length=200,
+                               error_messages={'invalid': 'Make sure you wrote at most 200 chars!'})
+
+    class Meta:
+        ordering = ("timestamp",)
+
+    def __str__(self):
+        return "{0} reported post_id {1}".format(self.user.username, self.post.id)

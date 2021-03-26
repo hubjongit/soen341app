@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from api.models import Post, FollowRelation
+from api.models import Post, FollowRelation, Report
 from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
-    FollowRelationSerializer, CommentSerializer
+    FollowRelationSerializer, CommentSerializer, ReportSerializer
 
 
 # Create your views here.
@@ -134,3 +134,24 @@ def api_follow(request):
         else:
             error_messages = [one_error for error in form.errors.values() for one_error in error]
             return Response({"errors": error_messages})
+
+
+@api_view(['POST', 'GET', 'DELETE', 'OPTIONS'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def api_report(request):
+    if request.method == "GET":
+        return Response("Report a post here")
+
+    if request.method == "POST":
+        request.data.update({'user': request.user.id})
+        form = ReportSerializer(data=request.data)
+        if form.is_valid():
+            form.save()
+            return Response({"success": "true"})
+        error_messages = [one_error for error in form.errors.values() for one_error in error]
+        return Response({"errors": error_messages})
+
+    elif request.method == "OPTIONS":
+        if request.user.is_superuser:
+            return Response(Report.report_reason_choices)
