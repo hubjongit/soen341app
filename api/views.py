@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import IsAuthenticated
 from api.models import Post, FollowRelation, Report
 from api.serializers import RegisterSerializer, LoginSerializer, PostSerializer, FeedSerializer, UsernameSerializer, \
-    FollowRelationSerializer, CommentSerializer, ReportSerializer
+    FollowRelationSerializer, CommentSerializer, ReportSerializer, ReportFeedSerializer
 
 
 # Create your views here.
@@ -141,7 +141,13 @@ def api_follow(request):
 @permission_classes([IsAuthenticated])
 def api_report(request):
     if request.method == "GET":
-        return Response("Report a post here")
+        if request.user.is_superuser:
+            posts = Post.objects.filter(reports__isnull=False).distinct()
+            posts_serializer = ReportFeedSerializer(posts, many=True)
+            return Response(posts_serializer.data)
+        else:
+            return Response({"errors": 'Please login as a superuser to see all the reports.'})
+
 
     if request.method == "POST":
         request.data.update({'user': request.user.id})

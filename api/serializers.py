@@ -86,4 +86,11 @@ class ReportSerializer(serializers.ModelSerializer):
                         'report_reason': {'write_only': True}}
 
 
+class ReportFeedSerializer(serializers.ModelSerializer):
+    timestamp = serializers.DateTimeField(format="%d-%b-%Y, %I:%M %p", required=False)
+    username = serializers.ReadOnlyField(source='user.username')
+    reports = ReportSerializer(read_only=True, many=True)
 
+    class Meta:
+        model = Post
+        fields = ('id', 'username', 'timestamp', 'image', 'caption', 'reports')
