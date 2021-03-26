@@ -156,3 +156,32 @@ class ReportTest(TestCase):
         response = self.client.get('/api/report/')
         self.assertEqual(response.data['errors'],
                          'Please login as a superuser to see all the reports.')
+
+    def test_dismiss_report_delete_request(self):
+        self.client.login(username='admin', password='Concordia.1')
+        response = self.client.delete('/api/report/', {'id': "1"}, format('application/json'))
+        all_reports = self.client.get('/api/report/')
+        self.assertEqual(response.data['success'], 'true')
+        self.assertEqual(all_reports.data, [])
+
+
+    def test_only_admin_dismiss_reports(self):
+        self.client.login(username='travis', password='Concordia.1')
+        response = self.client.delete('/api/report/', {'id': "1"}, format('application/json'))
+        self.assertEqual(response.data['errors'],
+                         'Please login as a superuser to see all the reports.')
+
+
+    def test_delete_post_delete_request(self):
+        self.client.login(username='admin', password='Concordia.1')
+        response = self.client.delete('/api/feed/', {'id': "1"}, format('application/json'))
+        all_reports = self.client.get('/api/feed/')
+        self.assertEqual(response.data['success'], 'true')
+        self.assertEqual(all_reports.data, [])
+
+
+    def test_only_admin_delete_post(self):
+        self.client.login(username='travis', password='Concordia.1')
+        response = self.client.delete('/api/feed/', {'id': "1"}, format('application/json'))
+        self.assertEqual(response.data['errors'],
+                         'Please login as a superuser to see all the reports.')

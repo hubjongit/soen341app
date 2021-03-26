@@ -1,6 +1,7 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from pytz import unicode
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -98,16 +99,27 @@ def api_getauth(request):
     return Response(content)
 
 
-@api_view(['GET'])
+@api_view(['GET','DELETE'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated])
 def api_feed(request):
-    following_objects = request.user.following.all()
-    following = [following_obj.user_to_follow for following_obj in following_objects]
-    following.append(request.user)
-    posts = Post.objects.filter(user__in=following)
-    posts_serializer = FeedSerializer(posts, many=True)
-    return Response(posts_serializer.data)
+    if request.method == "GET":
+        following_objects = request.user.following.all()
+        following = [following_obj.user_to_follow for following_obj in following_objects]
+        following.append(request.user)
+        posts = Post.objects.filter(user__in=following)
+        posts_serializer = FeedSerializer(posts, many=True)
+        return Response(posts_serializer.data)
+
+    elif request.method == "DELETE":
+        if request.user.is_superuser:
+            response = get_object_or_404(Post, id=request.data.get('id')).delete()
+            if response:
+                return Response({"success": "true"})
+            else:
+                return Response({"errors": 'could not delete the post'})
+        else:
+            return Response({"errors": 'Please login as a superuser to see all the reports.'})
 
 
 @api_view(['GET', 'POST'])
@@ -148,7 +160,6 @@ def api_report(request):
         else:
             return Response({"errors": 'Please login as a superuser to see all the reports.'})
 
-
     if request.method == "POST":
         request.data.update({'user': request.user.id})
         form = ReportSerializer(data=request.data)
@@ -161,3 +172,13 @@ def api_report(request):
     elif request.method == "OPTIONS":
         if request.user.is_superuser:
             return Response(Report.report_reason_choices)
+
+    elif request.method == "DELETE":
+        if request.user.is_superuser:
+            response = get_object_or_404(Report, id=request.data.get('id')).delete()
+            if response:
+                return Response({"success": "true"})
+            else:
+                return Response({"errors": 'could not delete the report'})
+        else:
+            return Response({"errors": 'Please login as a superuser to see all the reports.'})
