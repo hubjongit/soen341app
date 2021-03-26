@@ -140,5 +140,19 @@ class ReportTest(TestCase):
         self.report = Report.objects.create(post=self.post, report_reason=3, user=self.user, content="my report")
 
     def test_report_post_request(self):
-        response = self.client.post('/api/report/', {"post": "1","report_reason":2, "content": "my 1st report"}, format('application/json'))
+        response = self.client.post('/api/report/', {"post": "1", "report_reason": 2, "content": "my 1st report"},
+                                    format('application/json'))
         self.assertEqual(response.status_code, 200)
+
+    def test_reports_feed_get_request(self):
+        self.client.login(username='admin', password='Concordia.1')
+        response = self.client.get('/api/report/')
+        self.assertEqual(response.data[0]['reports'][0]['username'], 'travis')
+        self.assertEqual(response.data[0]['reports'][0]['content'], 'my report')
+        self.assertEqual(response.data[0]['reports'][0]['report_reason_value'], 'Harassment')
+
+    def test_only_admin_see_reports(self):
+        self.client.login(username='travis', password='Concordia.1')
+        response = self.client.get('/api/report/')
+        self.assertEqual(response.data['errors'],
+                         'Please login as a superuser to see all the reports.')
