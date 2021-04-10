@@ -60,6 +60,22 @@ The following summarize the technology that will likely be used when deploying t
 
 </details>
 
+## Coding Style and Naming Convention
+
+<details>
+<summary>Backend</summary>
+
+* The coding style that is followed in this project is following Django coding style documentation
+* [Django coding style](https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/)
+
+</details>
+
+<details>
+<summary>Frontend</summary>
+
+</details>
+
+
 ## Team Members
 
 * Jonathan Hubermann ([GitHub/hubjongit](https://github.com/hubjongit)) TEAM LEADER
