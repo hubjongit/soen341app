@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
     {
-        'NAME': 'soen341app.CustomPasswordValidator.CustomPasswordValidator',
+        'NAME': 'soen341app.custom_password_validator.CustomPasswordValidator',
     },
 ]
 
