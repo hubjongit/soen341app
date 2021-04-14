@@ -2,8 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 import {Avatar, Grid} from "@material-ui/core";
 import Comments from './Comments';
+import Reports from './Reports';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComments} from '@fortawesome/free-solid-svg-icons'
+import {faComments, faExclamationCircle} from '@fortawesome/free-solid-svg-icons'
 import '../App.css';
 
 
@@ -14,15 +15,26 @@ class Feed extends React.Component {
         this.state = {
             postData: [],
             showCommentsModal: false,
+            showReportModal: false,
             commentsModalState: {
                 postId: '',
                 postUsername: '',
                 postImage: '',
                 commentData: [],
+            },
+            reportModalState: {
+                postId: '',
+                postCaption: '',
+                postUsername: '',
+                postImage: '',
             }
+
+
         }
         this.enableShowCommentsModal = this.enableShowCommentsModal.bind(this);
         this.disableShowCommentsModal = this.disableShowCommentsModal.bind(this);
+        this.enableShowReportModal = this.enableShowReportModal.bind(this);
+        this.disableShowReportModal = this.disableShowReportModal.bind(this);
         this.fetchPosts = this.fetchPosts.bind(this);
     };
 
@@ -39,6 +51,18 @@ class Feed extends React.Component {
         this.setState({showCommentsModal: false});
     }
 
+    enableShowReportModal = (postId, postUsername, postImage, postCaption) => {
+        const newReportModalState = {
+            ...this.state.reportModalState, postId: postId, postUsername: postUsername,
+            postImage: postImage, postCaption: postCaption
+        };
+        this.setState({reportModalState: newReportModalState});
+        this.setState({showReportModal: true});
+    }
+
+    disableShowReportModal = () => {
+        this.setState({showReportModal: false});
+    }
 
     fetchPosts() {
         fetch('/api/feed/', {
@@ -71,6 +95,7 @@ class Feed extends React.Component {
                             <Post id={post.id} username={post.username} caption={post.caption}
                                   image={post.image} comments={post.comments}
                                   handleEnableShowComments={this.enableShowCommentsModal}
+                                  handleEnableShowReport={this.enableShowReportModal}
                                   key={index}/>
                         )
                     })}
@@ -90,12 +115,29 @@ class Feed extends React.Component {
                               handleDisableShowComments={this.disableShowCommentsModal}
                     />
                 </Modal>
+
+                <Modal
+                    isOpen={this.state.showReportModal}
+                    contentLabel="Post Report Section"
+                    shouldCloseOnOverlayClick={true}
+                    shoudCloseOnEsc={true}
+                    className='modal-container'
+                    onRequestClose={this.disableShowReportModal}
+                >
+                    <Reports id={this.state.reportModalState.postId}
+                            caption={this.state.reportModalState.postCaption}
+                            username={this.state.reportModalState.postUsername}
+                            image={this.state.reportModalState.postImage}
+                            handleDisableShowReport={this.disableShowReportModal}
+                    />
+                </Modal>
+
             </div>
         )
     }
 }
 
-function Post({id, username, caption, image, comments, handleEnableShowComments, index}) {
+function Post({id, username, caption, image, comments, handleEnableShowComments, handleEnableShowReport, index}) {
 
     return (
         <div className="post-card" key={index}>
@@ -106,6 +148,8 @@ function Post({id, username, caption, image, comments, handleEnableShowComments,
                     src=""
                 />
                 <p className="post-username">{username}</p>
+                <FontAwesomeIcon icon={faExclamationCircle} className='post-report-button ml-auto'
+                                 onClick={() => handleEnableShowReport(id, username, image, caption)}/>
             </div>
             <img className="post-image" src={image} alt=""/>
             <div className='post-bottom-section'>
