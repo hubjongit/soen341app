@@ -73,6 +73,10 @@ The following summarize the technology that will likely be used when deploying t
 <details>
 <summary>Frontend</summary>
 
+* The coding style that is followed in this project is following Google coding style documentation for HTML,CSS & JS
+* [Google JavaScript coding style](https://google.github.io/styleguide/jsguide.html#naming)
+* [Google HTML & CSS coding style](https://google.github.io/styleguide/htmlcssguide.html#CSS)
+
 </details>
 
 
