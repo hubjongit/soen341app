@@ -3,6 +3,7 @@ import './App.css';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import Feed from './components/Feed';
+import ReportFeed from "./components/ReportFeed";
 import PostForm from './components/PostForm';
 import FollowFinder from './components/FollowFinder';
 import Navbar from './components/Navbar';
@@ -29,6 +30,7 @@ function App() {
                         <ProtectedRoute path="/feed" component={Feed} isAuthenticated={isAuthenticated} redirect={'/login'} />
                         <ProtectedRoute path="/post" component={PostForm} isAuthenticated={isAuthenticated} redirect={'/login'}  />
                         <ProtectedRoute path="/follow" component={FollowFinder} isAuthenticated={isAuthenticated} redirect={'/login'}  />
+                        <ProtectedRoute path="/report" component={ReportFeed} isAuthenticated={isAuthenticated} redirect={'/login'}  />
                     </Switch>
                 </div>
             </div>
